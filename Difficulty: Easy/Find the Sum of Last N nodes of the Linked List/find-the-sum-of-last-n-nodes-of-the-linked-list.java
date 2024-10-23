@@ -31,24 +31,51 @@ class Node {
 class Solution {
 
     // Return the sum of last k nodes
-    public int sumOfLastN_Nodes(Node head, int n) 
+    public int sumOfLastN_Nodes(Node head, int n)
     {
-        ArrayList<Integer> al = new ArrayList<>();
-        Node temp = head;
-        
-        while(temp != null)
+        int result=0;
+        int length=0;
+       
+        Node temp=head;
+        int result1=0;
+        while(temp!=null)
         {
-            al.add(temp.data);
+            length++;
             temp = temp.next;
         }
-        
-        int sum=0;
-        Collections.reverse(al);
-       for(int i=0 ; i<n;i++)
-       {
-           sum = sum+al.get(i);
-       }
-       return sum;
+        temp= head;
+        if( n < length)
+        {
+            int count=1;
+            int traverse = length-n;
+            
+            while(temp!=null)
+            {
+                
+              
+                if(count > traverse)
+                {
+                     result = result+ temp.data;
+                     
+                }
+                count++;
+                temp  = temp.next;
+            }
+        }
+       
+        else
+        {
+           Node temp1 = head;
+           while(temp1!=null)
+           {
+               result = result+ temp1.data;
+               temp1 = temp1.next;
+           }
+        }
+        //  System.out.print(result);
+        // System.out.println(result1);
+        //   System.out.println(length);
+        return result;
     }
 }
 
