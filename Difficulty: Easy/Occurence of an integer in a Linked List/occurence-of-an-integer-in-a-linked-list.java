@@ -27,17 +27,19 @@ class Node
 }*/
 // complete the below function
 class Solution {
-    public static int count(Node head, int key) 
+    public static int count(Node head, int key)
     {
-         int count = 0;
+        int count=0;
         Node temp = head;
-        while(temp != null){
-            if(temp.data == key)count++;
+        while(temp!=null)
+        {
+            if(temp.data == key)
+            {
+                count++;
+            }
             temp = temp.next;
         }
-       
-    
-     return count;
+        return count;
     }
 }
 
@@ -64,7 +66,9 @@ class LinkedList {
             int key = Integer.parseInt(br.readLine());
             Solution ob = new Solution();
             System.out.println(ob.count(head, key));
-        }
+        
+System.out.println("~");
+}
     }
 }
 
