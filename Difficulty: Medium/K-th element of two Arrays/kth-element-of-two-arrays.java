@@ -13,19 +13,20 @@ class GFG {
             int k = Integer.parseInt(br.readLine().trim());
 
             String[] line1 = br.readLine().trim().split(" ");
-            int[] arr1 = new int[line1.length];
+            int[] a = new int[line1.length];
             for (int i = 0; i < line1.length; i++) {
-                arr1[i] = Integer.parseInt(line1[i]);
+                a[i] = Integer.parseInt(line1[i]);
             }
 
             String[] line2 = br.readLine().trim().split(" ");
-            int[] arr2 = new int[line2.length];
+            int[] b = new int[line2.length];
             for (int i = 0; i < line2.length; i++) {
-                arr2[i] = Integer.parseInt(line2[i]);
+                b[i] = Integer.parseInt(line2[i]);
             }
 
             Solution ob = new Solution();
-            System.out.println(ob.kthElement(k, arr1, arr2));
+            System.out.println(ob.kthElement(a, b, k));
+            System.out.println("~");
         }
     }
 }
@@ -36,18 +37,42 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public long kthElement(int k, int arr1[], int arr2[])
+    public int kthElement(int a[], int b[], int k)
     {
-        ArrayList<Integer> al = new ArrayList<>();
-        for(int i=0;i<arr1.length;i++)
+        int start=0;
+        int count=0;
+        int n = a.length;
+        int m = b.length;
+        int temp[] =  new int[n+m];
+        
+        int i=0;
+        int j=0;
+        while(i<n && j<m)
         {
-            al.add(arr1[i]);
+            if(a[i] < b[j])
+            {
+                temp[start] = a[i];
+                i++;
+                start++;
+            }
+            else
+            {
+                temp[start] = b[j];
+                j++;start++;
+            }
         }
-         for(int i=0;i<arr2.length;i++)
+        while(i<n)
         {
-            al.add(arr2[i]);
+            temp[start] = a[i];
+            i++;
+            start++;
         }
-        Collections.sort(al);
-        return al.get(k-1);
+        while(j<m)
+        {
+            temp[start] = b[j];
+            j++;
+            start++;
+        }
+        return temp[k-1];
     }
 }
