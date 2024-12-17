@@ -19,6 +19,7 @@ public class Main {
                 System.out.print(arr[i] + " ");
             }
             System.out.println();
+            System.out.println("~");
         }
     }
 }
@@ -26,18 +27,28 @@ public class Main {
 
 
 class Solution {
-    public void reverseArray(int arr[]) 
+
+ void func(int arr[],int i,int j)
+{
+    if(i+1==0)
+    
+        return ;
+    
+    else{
+        
+        if(i<j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            func(arr,i+1,j-1);
+        }
+    }
+}
+
+
+  public void reverseArray(int arr[])
     {
-        int count=0;
-        int reverse[] = new int[arr.length];
-        for(int i=arr.length-1;i>=0;i--)
-        {
-            reverse[count] = arr[i];
-            count++;
-        }
-        for(int i=0;i<arr.length;i++)
-        {
-            arr[i] = reverse[i];
-        }
+        func(arr,0,arr.length-1);
     }
 }
