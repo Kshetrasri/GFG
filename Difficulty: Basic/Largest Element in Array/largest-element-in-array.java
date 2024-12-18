@@ -52,16 +52,16 @@ class GFG {
 
 class Solution 
 {
-   static int ans=0;
-   static  void func(int arr[],int i,int max)
+  
+   static  int func(int arr[],int i,int max,int ans)
     {
         
         if(i>=arr.length)
         {
-            return;
+            return ans;
         }
-        else
-        {
+        
+       
               
             if(arr[i] >= max)
             {
@@ -69,13 +69,13 @@ class Solution
                 ans = max;
             }
             i++;
-            func(arr,i,max);
-        }
+          return  func(arr,i,max,ans);
+        
     }
     public static int largest(int[] arr)
     {
         int max=Integer.MIN_VALUE;
-        func(arr,0,max);
-        return ans;
+       int a =  func(arr,0,max,0);
+        return a;
     }
 }
