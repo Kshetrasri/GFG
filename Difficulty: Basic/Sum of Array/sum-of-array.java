@@ -23,7 +23,9 @@ public class Main {
                 new Solution().sum(nums); // Compute the sum using the Solution class
 
             System.out.println(ans); // Print the result
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
@@ -31,14 +33,21 @@ public class Main {
 
 // User function Template for Java
 
-class Solution {
-    int sum(int arr[]) 
-    {
-        int sum=0;
-        for(int i=0;i<arr.length;i++)
-        {
-            sum = sum+arr[i];
-        }
-        return sum ; //here
+class Solution 
+{
+     
+     int func(int arr[],int sum,int i)
+     {
+         if(i<0)
+         return sum;
+         
+         sum = sum+arr[i];
+         return func(arr,sum,i-1);
+     }
+    
+    
+    int sum(int arr[]) {
+        int sum1 = func(arr,0,arr.length-1);
+        return sum1;
     }
 }
