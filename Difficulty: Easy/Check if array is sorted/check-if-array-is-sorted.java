@@ -7,29 +7,28 @@ import java.util.*;
 
 class Solution 
 {
-    int result=0;
-    void func(int arr[],int i)
+    
+    int func(int arr[],int i,int result)
     {
         if(i>=arr.length)
         {
-            return ;
+            return  result;
         }
-        else
-        {
+       
             if(arr[i] < arr[i-1])
             {
                 result=1;
             }
-            i++;
-            func(arr,i);
-        }
+            
+         return   func(arr,i+1,result);
+        
         
         
     }
     public boolean arraySortedOrNot(int[] arr)
     {
-         func(arr,1);
-        if(result == 1)
+       int result1 =   func(arr,1,0);
+        if(result1 == 1)
         {
             return false;
         }
