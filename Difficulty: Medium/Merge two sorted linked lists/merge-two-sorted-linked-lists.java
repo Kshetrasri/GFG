@@ -19,45 +19,53 @@ public class Main {
             temp = temp.next;
         }
         System.out.println();
+        System.out.println("~");
+    }
+
+    // Insert node into the list in a sorted manner
+    public static Node insertSorted(Node head, int data) {
+        Node newNode = new Node(data);
+        if (head == null || head.data >= data) {
+            newNode.next = head;
+            return newNode;
+        }
+
+        Node current = head;
+        while (current.next != null && current.next.data < data) {
+            current = current.next;
+        }
+        newNode.next = current.next;
+        current.next = newNode;
+
+        return head;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
-        sc.nextLine();
+        sc.nextLine(); // Consume the newline character
         while (T-- > 0) {
-            Node head1 = null, tail1 = null;
-            Node head2 = null, tail2 = null;
+            Node head1 = null;
+            Node head2 = null;
 
+            // Reading first linked list input
             String input1 = sc.nextLine();
             String[] elems1 = input1.split(" ");
             for (String elem : elems1) {
-                Node newNode = new Node(Integer.parseInt(elem));
-                if (head1 == null) {
-                    head1 = newNode;
-                    tail1 = newNode;
-                } else {
-                    tail1.next = newNode;
-                    tail1 = newNode;
-                }
+                head1 = insertSorted(head1, Integer.parseInt(elem));
             }
 
+            // Reading second linked list input
             String input2 = sc.nextLine();
             String[] elems2 = input2.split(" ");
             for (String elem : elems2) {
-                Node newNode = new Node(Integer.parseInt(elem));
-                if (head2 == null) {
-                    head2 = newNode;
-                    tail2 = newNode;
-                } else {
-                    tail2.next = newNode;
-                    tail2 = newNode;
-                }
+                head2 = insertSorted(head2, Integer.parseInt(elem));
             }
 
+            // Merging sorted linked lists
             Solution obj = new Solution();
-            Node head = obj.sortedMerge(head1, head2);
-            printList(head);
+            Node mergedHead = obj.sortedMerge(head1, head2);
+            printList(mergedHead); // Print the merged sorted list
         }
         sc.close();
     }
@@ -82,38 +90,30 @@ class Solution {
     // Function to merge two sorted linked list.
     Node sortedMerge(Node head1, Node head2) 
     {
-        ArrayList<Integer> al = new ArrayList<>();
-       Node temp = head1;
-       Node temp1 = head2;
-       
-       while(temp!=null)
-       {
-           al.add(temp.data);
-           temp = temp.next;
-       }
-       
-        while(temp1!=null)
-       {
-           al.add(temp1.data);
-           temp1 = temp1.next;
-       }
-       
-       Collections.sort(al);
-       
-     Node   NewHead = null;
-       for(int i = al.size()-1;i>=0;i--)
-       {
-           Node newNode = new Node(al.get(i));
-           if(NewHead == null)
-           {
-               NewHead = newNode;
-           }
-           else
-           {
-               newNode.next = NewHead;
-               NewHead = newNode; 
-           }
-       }
-       return NewHead;
+         Node new_head = new Node(0);
+         Node temp = head1;
+         Node temp1 = head2;
+         Node curr = new_head;
+         
+         while(temp!=null && temp1!=null)
+         {
+             if(temp.data < temp1.data)
+             {
+                 curr.next = temp;
+                 temp = temp.next;
+             }
+             else
+             {
+                 curr.next = temp1;
+                 temp1 = temp1.next;
+             }
+             curr  = curr.next;
+         }
+        if (temp != null) {
+        curr.next = temp;
+        } else if (temp1 != null) {
+        curr.next = temp1;
+    }
+         return new_head.next;
     }
 }
