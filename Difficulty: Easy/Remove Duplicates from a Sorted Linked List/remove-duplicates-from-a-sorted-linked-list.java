@@ -53,12 +53,15 @@ class Remove_Duplicate_From_LL {
                 ans = ans.next;
             }
             System.out.println();
+            System.out.println("~");
 
             t--;
         }
     }
 }
 // } Driver Code Ends
+
+
 
 
 /*
@@ -74,38 +77,22 @@ class Solution {
     // Function to remove duplicates from sorted linked list.
     Node removeDuplicates(Node head) 
     {
-         HashSet<Integer> hs = new HashSet<>();
         Node temp = head;
+        Node new_head = new Node(0);
+        Node curr = new_head;
         
-        while(temp !=null)
-        {
-            hs.add(temp.data);
-            temp=  temp.next;
-        }
-        ArrayList<Integer> al =new ArrayList<>();
-        for(int i:hs)
-        {
-            al.add(i);
-        }
+    
         
-        Collections.sort(al);
-        Node new_head = null;
-        
-        for(int i=al.size()-1;i>=0;i--)
+        while(temp!=null)
         {
-            Node node = new Node(al.get(i));
-            
-            if(new_head == null)
+            if (curr == new_head || temp.data != curr.data) 
             {
-                new_head = node;
+                 curr.next = new Node(temp.data); 
+                curr = curr.next;
             }
-            else
-            {
-                node.next = new_head;
-                new_head = node;
-            }
+            temp = temp.next;
         }
-        return new_head;
-        // Your code here
+        curr.next = null;
+        return new_head.next;
     }
 }
