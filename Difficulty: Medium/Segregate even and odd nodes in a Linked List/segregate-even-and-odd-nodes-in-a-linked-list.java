@@ -70,7 +70,9 @@ class GFG {
             Node ans = ob.divide(head);
             printList(ans);
             t--;
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
@@ -93,67 +95,51 @@ class Node{
 class Solution {
     Node divide(Node head)
     {
-        Node odd_start = null;
-        Node even_start = null;
-        Node odd_end = null;
-        Node even_end = null;
+        ArrayList<Integer> even = new ArrayList<>();
+        ArrayList<Integer> odd = new ArrayList<>();
         
         Node temp = head;
         
         while(temp!=null)
         {
-            if(temp.data % 2 == 0)
+            if(temp.data % 2 == 0 )
             {
-                if(even_start == null)
-                {
-                    even_start = temp;
-                    even_end = temp;
-                   
-                }
-                else
-                {
-                    even_end.next = temp;
-                    
-                    even_end = even_end.next;
-                }
+                even.add(temp.data);
             }
-            else
-            {
-                 if(odd_start == null)
-                {
-                    odd_start = temp;
-                    odd_end = temp;
-                   
-                }
-                else
-                {
-                     odd_end.next = temp;
-                      odd_end = odd_end.next;
-                }
-                
-            }
-             temp=  temp.next;
-             
+            temp = temp.next;
         }
-    if (even_end != null) 
-            even_end.next = null;
-            
-             if (odd_end != null) {
-            odd_end.next = null;
-        }
-    
-      if(even_start ==null)
-      
-          return odd_start;
-      
-     if(odd_start == null)
-     
-         return even_start;
-     
-     
+        temp = head;
         
-
-     even_end.next = odd_start;
-        return even_start;
+        while(temp!=null)
+        {
+            if(temp.data % 2 != 0 )
+            {
+                odd.add(temp.data);
+            }
+            temp = temp.next;
+        }
+        
+        temp= head;
+        
+        int i=0;
+        while(i < even.size())
+        {
+            int key = even.get(i);
+            temp.data = key;
+            temp = temp.next;
+            i++;
+        }
+        
+        i=0;
+        while(i< odd.size())
+        {
+            int key = odd.get(i);
+            temp.data = key;
+            temp = temp.next;
+            i++;
+        }
+        
+        
+        return head;
     }
 }
