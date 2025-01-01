@@ -30,22 +30,48 @@ class Solution {
     // the end of a linked list.
     int getKthFromLast(Node head, int k) 
     {
+        int length=0;
         Node temp = head;
-        ArrayList<Integer> al = new ArrayList<>();
         
         while(temp!=null)
         {
-            al.add(temp.data);
+            length++;
             temp = temp.next;
         }
-        //Collections.reverse(al);
-        //System.out.println("The size is" +al.size());
-       
-       if(k > al.size())
-       {
-           return -1;
-       }
-        return al.get(al.size()-k);
+        if(length % 2 != 0)
+        {
+            int rem = length-k;
+            Node prev = head;
+            int count= 0;
+            
+            while(prev!=null)
+            {
+                if(count == rem)
+                {
+                    return prev.data;
+                }
+                prev = prev.next;
+                count++;
+            }
+            
+        }
+        else
+        {
+            int rem = length-k;
+            Node prev1 = head;
+            int count=0;
+            
+            while(prev1!=null)
+            {
+                if(count == rem)
+                {
+                    return prev1.data;
+                }
+                prev1 = prev1.next;
+                count++;
+            }
+        }
+        return -1;
     }
 }
 
@@ -92,7 +118,9 @@ public class GFG {
             Solution g = new Solution();
             // System.out.println(k);
             System.out.println(g.getKthFromLast(head, x));
-        }
+        
+System.out.println("~");
+}
     }
 }
 
