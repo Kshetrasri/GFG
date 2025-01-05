@@ -28,42 +28,64 @@ class Node
     }
 }
 */
-class Solution 
-{
+class Solution {
     // Function to sort a linked list of 0s, 1s and 2s.
-    static Node segregate(Node head)
+    static Node segregate(Node head) 
     {
-        ArrayList<Integer> al = new ArrayList<>();
+        int zeros = 0;
+        int ones = 0;
+        int twos = 0;
+        
         Node temp = head;
         
+        
+        if(head == null || head.next == null){
+            return head;
+        }
         while(temp!=null)
         {
-            al.add(temp.data);
-            temp = temp.next;
-        }
-        
-        Collections.sort(al);
-        
-        Node new_head=  null;
-        
-        for(int i=al.size()-1;i>=0;i--)
-        {
-            Node node=  new Node(al.get(i));
-            
-            if(new_head==null)
+            if(temp.data == 0)
             {
-                new_head = node;
+                zeros++;
+            }
+            else if(temp.data == 1)
+            {
+                ones++;
             }
             else
             {
-                node.next = new_head;
-                new_head = node;
+                twos++;
             }
+            temp = temp.next;
         }
-        return new_head;
+        
+        temp =  head;
+        int length = 0;
+        while(length< zeros)
+        {
+            temp.data = 0;
+            length++;
+            temp = temp.next;
+        }
+        length = 0;
+        while(length < ones)
+        {
+            temp.data = 1;
+            length++;
+            temp = temp.next;
+        }
+        length = 0;
+        
+        while(length<twos)
+        {
+            temp.data = 2;
+            length++;
+            temp = temp.next;
+        }
+        
+        return head;
     }
 }
-
 
 
 //{ Driver Code Starts.
